@@ -1,0 +1,46 @@
+{
+    "name": "IA_Player",
+    "maps": [
+        {
+            "name": "PlayerAction",
+            "id": "7d9df2d1-9900-4b87-8b15-e45ff2bbaf66",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "1716b776-cd77-4bd0-bd8f-7705a30836e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5034c433-5f8c-47d4-9955-a01e3b89b872",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Mobile",
+            "bindingGroup": "Mobile",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
