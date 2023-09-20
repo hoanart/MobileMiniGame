@@ -23,6 +23,7 @@ public class TriggerObject : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             Debug.Log("충돌");
+            gameObject.SetActive(false);
         }
     }
 }
