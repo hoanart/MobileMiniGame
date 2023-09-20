@@ -74,3 +74,5 @@ crashlytics-build.properties
 .idea/
 Assets/Plugins/Editor/JetBrains*
 Assets/Helpers/*
+Assets/Helpers/AlmostEngine/*
+Assets/Helpers/ExternalDependencyManager/*
