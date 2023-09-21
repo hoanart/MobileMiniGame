@@ -6,12 +6,21 @@
             "id": "7d9df2d1-9900-4b87-8b15-e45ff2bbaf66",
             "actions": [
                 {
-                    "name": "Move",
-                    "type": "Button",
+                    "name": "Position",
+                    "type": "Value",
                     "id": "1716b776-cd77-4bd0-bd8f-7705a30836e8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Press",
+                    "type": "Button",
+                    "id": "c4d762dc-9ef4-4880-92bc-6784a5b3847f",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -19,11 +28,44 @@
                 {
                     "name": "",
                     "id": "5034c433-5f8c-47d4-9955-a01e3b89b872",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfd1f89a-2bfc-4374-9cb9-896e2725ab69",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eca394a2-9837-4659-afb7-8a8508495b03",
                     "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Move",
+                    "groups": "Mobile",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53485587-deb3-433f-980b-ec416662a110",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse",
+                    "action": "Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -37,6 +79,17 @@
             "devices": [
                 {
                     "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Mouse",
+            "bindingGroup": "Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
