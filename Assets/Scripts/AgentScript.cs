@@ -6,12 +6,12 @@ using UnityEngine.AI;
 public class AgentScript : MonoBehaviour
 {
     [SerializeField] private Transform target;
-
+    [SerializeField] private TouchManager touchManager;
+    
     private NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Enemy").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -20,6 +20,15 @@ public class AgentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(target.position);
+        if (touchManager.target != null)
+        {
+            target = touchManager.target;
+        }
+        if (target != null)
+        {
+            agent.SetDestination(target.position);
+            target = null;
+        }
+       
     }
 }
