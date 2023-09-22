@@ -23,7 +23,7 @@ public class AnchorGameObject : MonoBehaviour
 
     public AnchorType anchorType;
     public Vector3 anchorOffset;
-
+    
     private IEnumerator updateAnchorRoutine;
     
     
@@ -91,6 +91,7 @@ public class AnchorGameObject : MonoBehaviour
     void SetAnchor(Vector3 anchor)
     {
         Vector3 newPos = anchor + anchorOffset;
+        
        // Debug.Log(anchor);
         if (!transform.position.Equals(newPos))
         {

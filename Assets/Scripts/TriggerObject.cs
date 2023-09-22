@@ -5,16 +5,27 @@ using UnityEngine;
 
 public class TriggerObject : MonoBehaviour
 {
+    [SerializeField]
+    private AnchorGameObject anchor;
+    [SerializeField]
+    private bool trans;
+
+    private void OnEnable()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        anchor = GetComponent<AnchorGameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
+       
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -25,5 +36,7 @@ public class TriggerObject : MonoBehaviour
             Debug.Log("충돌");
             gameObject.SetActive(false);
         }
+
+      
     }
 }

@@ -10,23 +10,9 @@ public class CameraViewportHandler : MonoBehaviour
     public static CameraViewportHandler Instance = null;
     public struct BottomScreen
     {
-        public Vector3 Left
-        {
-            get;
-            set;
-        }
-
-        public Vector3 Center
-        {
-            get;
-            set;
-        }
-
-        public Vector3 Right
-        {
-            get;
-            set;
-        }
+        public Vector3 Left;
+        public Vector3 Center;
+        public Vector3 Right;
     }
 
    public struct MiddleScreen
