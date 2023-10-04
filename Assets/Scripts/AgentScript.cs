@@ -23,12 +23,13 @@ public class AgentScript : MonoBehaviour
         if (touchManager.target != null)
         {
             target = touchManager.target;
+            if (agent.pathEndPosition!=target.position)
+            {
+                agent.SetDestination(target.position);
+                //target = null;
+            }
         }
-        if (target != null)
-        {
-            agent.SetDestination(target.position);
-            target = null;
-        }
+       
        
     }
 }

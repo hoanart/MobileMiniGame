@@ -117,7 +117,7 @@ public class SpawnManager : MonoBehaviour
         #if UNITY_EDITOR
         if (executeInUpdate)
         {
-              boxCollider2D.size = new Vector2(CameraViewportHandler.Instance.Width*0.8f, CameraViewportHandler.Instance.Height*0.7f);
+              boxCollider2D.size = new Vector2(CameraViewportHandler.Instance.Width*0.8f, CameraViewportHandler.Instance.Height*0.85f);
         }
         #endif
     }
