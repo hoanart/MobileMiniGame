@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TriggerObject : MonoBehaviour
@@ -10,6 +11,11 @@ public class TriggerObject : MonoBehaviour
     [SerializeField]
     private bool trans;
 
+    [SerializeField]
+    public TMP_Text scoreText;
+    
+    [SerializeField]
+    public int score =100;
     private void OnEnable()
     {
 
@@ -34,9 +40,15 @@ public class TriggerObject : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             Debug.Log("충돌");
+            IncreaseScore();
             gameObject.SetActive(false);
         }
+    }
 
-      
+    private void IncreaseScore()
+    {
+        int? currNum = int.Parse(scoreText.text);
+        currNum += score;
+        scoreText.text = currNum.ToString();
     }
 }

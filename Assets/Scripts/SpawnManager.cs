@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,9 +14,11 @@ public class SpawnManager : MonoBehaviour
     public int count = 50;
     [SerializeField]
     private GameObject mUrchin;
-    [SerializeField]
     private Stack<GameObject> mUrchins;
 
+    [SerializeField]
+    private TMP_Text mScore;
+    
     private Dictionary<Vector3, GameObject> mSpawnedObjDict;
     [SerializeField]
     private bool executeInUpdate;
@@ -40,6 +44,7 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             GameObject urchinObj = Instantiate(mUrchin, transform, true);
+            urchinObj.GetComponentInChildren<TriggerObject>().scoreText = mScore;
             urchinObj.SetActive(false);
             mUrchins.Push(urchinObj);
         }
@@ -104,6 +109,11 @@ public class SpawnManager : MonoBehaviour
             else
             {
                 yield return new WaitForSeconds(spawnTime);
+            }
+
+            if (GameManager.instance.State == GameState.GAMEOVER)
+            {
+                yield break;
             }
             //yield return null;
             

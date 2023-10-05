@@ -7,23 +7,22 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Text mText;
+    protected TMP_Text mText;
 
     [SerializeField]
-    private float mTime;
+    protected float mTime = 30.0f;
 
     [SerializeField]
-    private float mCurrentTime;
+    protected float mCurrentTime;
 
-    private int mSeconds;
+    protected int mSeconds;
 
-    private IEnumerator mStartTimerCoroutine;
+    protected IEnumerator mStartTimerCoroutine;
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        mTime = 30.0f;
         mStartTimerCoroutine = StartTimer();
-        StartCoroutine(mStartTimerCoroutine);
+
     }
 
     private IEnumerator StartTimer()
@@ -42,9 +41,14 @@ public class Timer : MonoBehaviour
             {
                 Debug.Log("시간 종료");
                 mCurrentTime = 0;
+                SetGameState();
                 yield break;
             }
         }
+    }
+
+    protected virtual void SetGameState()
+    {
         
     }
 }

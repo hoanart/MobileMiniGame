@@ -20,7 +20,7 @@ public class AgentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (touchManager.target != null)
+        if (touchManager.target != null&&GameManager.instance.State==GameState.ONGOING)
         {
             target = touchManager.target;
             if (agent.pathEndPosition!=target.position)

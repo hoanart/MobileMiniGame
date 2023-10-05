@@ -151,3 +151,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchor: {fileID: 0}
   trans: 0
+  scoreText: {fileID: 0}
+  score: 100
