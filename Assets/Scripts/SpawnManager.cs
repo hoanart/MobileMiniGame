@@ -48,14 +48,18 @@ public class SpawnManager : MonoBehaviour
             urchinObj.SetActive(false);
             mUrchins.Push(urchinObj);
         }
-
+        boxCollider2D.size = new Vector2(CameraViewportHandler.Instance.Width*0.8f, CameraViewportHandler.Instance.Height*0.85f);
         spawnRoutine = SpawnRoutine();
-
+        GameManager.instance.OnChangeScore += ShowCurrentScore;
         StartCoroutine(spawnRoutine);
     }
 
     IEnumerator SpawnRoutine()
     {
+        while (GameManager.instance.State == GameState.READY)
+        {
+            yield return null;
+        }
         while (!mbEnd)
         {
             GameObject spawnedObj = mUrchins.Pop();
@@ -65,6 +69,7 @@ public class SpawnManager : MonoBehaviour
             anchor.anchorOffset = new Vector3(Random.Range(bounds.min.x, bounds.max.x),
                 Random.Range(bounds.min.y,bounds.max.y),
                 0.0f);
+           
 
             Collider2D[] hits =
                 Physics2D.OverlapBoxAll(anchor.anchorOffset, spawnedObj.GetComponent<CircleCollider2D>().bounds.size, 0);
@@ -113,23 +118,29 @@ public class SpawnManager : MonoBehaviour
 
             if (GameManager.instance.State == GameState.GAMEOVER)
             {
+                GameManager.instance.Score = Int32.Parse(mScore.text);
                 yield break;
+                
             }
             //yield return null;
             
         }
         yield return null;
     }
-    
+
+    int ShowCurrentScore()
+    {
+        return Int32.Parse(mScore.text);
+    }
     // Update is called once per frame
     void Update()
     {
-        #if UNITY_EDITOR
-        if (executeInUpdate)
-        {
-              boxCollider2D.size = new Vector2(CameraViewportHandler.Instance.Width*0.8f, CameraViewportHandler.Instance.Height*0.85f);
-        }
-        #endif
+        // #if UNITY_EDITOR
+        // if (executeInUpdate)
+        // {
+        //       boxCollider2D.size = new Vector2(CameraViewportHandler.Instance.Width*0.8f, CameraViewportHandler.Instance.Height*0.85f);
+        // }
+        // #endif
     }
     
 }

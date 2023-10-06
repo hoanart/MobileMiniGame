@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public enum GameState
 {
     READY,
@@ -22,8 +25,28 @@ public class GameManager : MonoBehaviour
             return mInstance;
         }
     }
+
+    public int Score
+    {
+        get => mScore;
+        set
+        {
+            mScore = value;
+        }
+    }
     private static GameManager mInstance = null;
 
+    [SerializeField]
+    private int mScore;
+
+    [SerializeField]
+    private TMP_Text mFinalScore;
+    [SerializeField]
+    private GameObject gameoverPanel;
+
+    public delegate int DeleChange();
+
+    public event DeleChange OnChangeScore;
     void Awake()
     {
         if (mInstance == null)
@@ -38,6 +61,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         
     }
 
@@ -53,12 +77,30 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        #if UNITY_EDITOR
-        //UnityEditor.EditorApplication.isPlaying = false;
-        Debug.Log("게임 오버");
-        #else
-        
-        #endif
+        if (gameoverPanel == null)
+        {
+            Debug.LogError("Add GameOverPanel in the Scene");
+            return;
+        }
 
+        mFinalScore.text = OnChangeScore().ToString();
+        gameoverPanel.SetActive(true);
+        Debug.Log("게임 오버");
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(0);
+
+    }
+
+    public void Quit()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
+        
     }
 }
