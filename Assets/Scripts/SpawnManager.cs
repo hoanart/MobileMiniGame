@@ -8,10 +8,11 @@ using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
-
+    
     public BoxCollider2D boxCollider2D;
     
     public int count = 50;
+    public static int GetSpawnedObjCount;
     [SerializeField]
     private GameObject mUrchin;
     private Stack<GameObject> mUrchins;
@@ -25,6 +26,13 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     private float spawnTime =5.0f;
+
+    [SerializeField]
+    private float spawnRate = 0.0f;
+    [SerializeField]
+    private float spawnDelayRate = 2.0f;
+    
+
     [SerializeField]
     private bool mbEnd;
     private IEnumerator spawnRoutine;
@@ -60,9 +68,14 @@ public class SpawnManager : MonoBehaviour
         {
             yield return null;
         }
+
+         spawnRate = spawnTime;
         while (!mbEnd)
         {
+            if(spawnRate<=0)
+            {
             GameObject spawnedObj = mUrchins.Pop();
+            
             AnchorGameObject anchor = spawnedObj.GetComponent<AnchorGameObject>();
             var bounds = boxCollider2D.bounds;
             
@@ -87,16 +100,19 @@ public class SpawnManager : MonoBehaviour
                 mbOverlapped = true;
                 
             }
-
+            
             if (mbOverlapped)
             {
                 spawnedObj.SetActive(false);
                 mUrchins.Push(spawnedObj);
-               
+                GetSpawnedObjCount -= 1;
+                Debug.Log($"GetSpawned : {GetSpawnedObjCount}");
             }
             else
             {
                 mSpawnedObjDict.Add(anchor.anchorOffset,spawnedObj);
+                GetSpawnedObjCount += 1;
+                Debug.Log($"GetSpawned : {GetSpawnedObjCount}");
                 spawnedObj.SetActive(true);
                 Debug.Log("생성");
                 if (mUrchins.Count == 0)
@@ -106,6 +122,10 @@ public class SpawnManager : MonoBehaviour
 
             }
 
+            spawnTime -= 0.1f;
+            spawnTime = Mathf.Clamp(spawnTime, 0.5f, 2.0f);
+            spawnRate = spawnTime;
+            }
             if (mbOverlapped)
             {
                 yield return new WaitForSeconds(0.01f);
@@ -113,7 +133,10 @@ public class SpawnManager : MonoBehaviour
             }
             else
             {
-                yield return new WaitForSeconds(spawnTime);
+                //yield return new WaitForSeconds(spawnTime);
+                spawnRate -= Time.deltaTime;
+              
+                yield return null;
             }
 
             if (GameManager.instance.State == GameState.GAMEOVER)
@@ -141,6 +164,8 @@ public class SpawnManager : MonoBehaviour
         //       boxCollider2D.size = new Vector2(CameraViewportHandler.Instance.Width*0.8f, CameraViewportHandler.Instance.Height*0.85f);
         // }
         // #endif
+
+
     }
     
 }

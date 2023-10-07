@@ -26,21 +26,21 @@ public class TriggerObject : MonoBehaviour
     {
         anchor = GetComponent<AnchorGameObject>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-       
-    }
+    
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log(col.tag);
+        //Debug.Log(col.tag);
+        if (GameManager.instance.State != GameState.ONGOING)
+        {
+            return;
+        }
         if (col.CompareTag("Player"))
         {
             Debug.Log("충돌");
             IncreaseScore();
+            SpawnManager.GetSpawnedObjCount -= 1;
+            Debug.Log($"GetSpawned : {SpawnManager.GetSpawnedObjCount}");
             gameObject.SetActive(false);
         }
     }
